@@ -2,7 +2,6 @@ import { useState, forwardRef, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { Grid } from '@mui/material'
 import SelectSubject from './SelectSubject'
-// import TextField from './TextField'
 import TextField from '@mui/material/TextField'
 import Box from '@mui/material/Box'
 import InputLabel from '@mui/material/InputLabel'
@@ -13,12 +12,23 @@ import { useRef } from 'react'
 import Button from '@mui/material/Button'
 import { workbookInfo, workbookList } from '@/data/workbook/workbooks'
 import { useIsRightOpenContext } from '@/store/isrightopen-context'
-import { subjectList } from '@/data/subject/subject'
 import Right from '../..'
+import { useSubject } from '@/hooks/subject'
+import Loading from '@/components/ui/Loading'
 
 const WorkbookForm = () => {
     let rightContentData, rightContent
 
+    const [subjectList, setSubjectList] = useState([])
+    const { getSubjectList } = useSubject()
+
+    useEffect(() => {
+        getSubjectList({ setSubjectList })
+    }, [])
+    useEffect(() => {
+        subjectList.length !== 0 ? setLoading(false) : ''
+    }, [subjectList])
+    const [loading, setLoading] = useState(true)
     const router = useRouter()
     const path = router.pathname
     const id = Number(router.query.id)
@@ -157,50 +167,56 @@ const WorkbookForm = () => {
 
     return (
         <>
-            <form onSubmit={submitHandler}>
-                <Grid container spacing={3}>
-                    <Grid item xs={12}>
-                        <FormControl fullWidth>
-                            <InputLabel id="demo-simple-select-label">
-                                科目
-                            </InputLabel>
-                            <Select
-                                labelId="demo-simple-select-label"
-                                id="demo-simple-select"
-                                // ref={subjectInputRef}
-                                label="科目"
-                                value={subjectInputState}
-                                onChange={subjectInputChangeHandler}>
-                                {subjectList.map(subject => {
-                                    return (
-                                        <MenuItem value={subject} key={subject}>
-                                            {subject}
-                                        </MenuItem>
-                                    )
-                                })}
-                            </Select>
-                        </FormControl>
+            {loading ? (
+                <Loading size="full"/>
+            ) : (
+                <form onSubmit={submitHandler}>
+                    <Grid container spacing={3}>
+                        <Grid item xs={12}>
+                            <FormControl fullWidth>
+                                <InputLabel id="demo-simple-select-label">
+                                    科目
+                                </InputLabel>
+                                <Select
+                                    labelId="demo-simple-select-label"
+                                    id="demo-simple-select"
+                                    // ref={subjectInputRef}
+                                    label="科目"
+                                    value={subjectInputState}
+                                    onChange={subjectInputChangeHandler}>
+                                    {subjectList.map(subject => {
+                                        return (
+                                            <MenuItem
+                                                value={subject}
+                                                key={subject}>
+                                                {subject}
+                                            </MenuItem>
+                                        )
+                                    })}
+                                </Select>
+                            </FormControl>
+                        </Grid>
+                        <Grid item xs={12}>
+                            <TextField
+                                fullWidth
+                                id="outlined-basic"
+                                label="教材名"
+                                value={workbookNameInputState}
+                                onChange={workbookNameInputChangeHandler}
+                                variant="outlined"
+                                // ref={workbookNameInputRef}
+                            />
+                        </Grid>
+                        {rightContent !== null && filledContent}
+                        {rightContent === null && unfilledContent}
+                        <Grid item xs={12}>
+                            <Button variant="contained" size="large">
+                                登録
+                            </Button>
+                        </Grid>
                     </Grid>
-                    <Grid item xs={12}>
-                        <TextField
-                            fullWidth
-                            id="outlined-basic"
-                            label="教材名"
-                            value={workbookNameInputState}
-                            onChange={workbookNameInputChangeHandler}
-                            variant="outlined"
-                            // ref={workbookNameInputRef}
-                        />
-                    </Grid>
-                    {rightContent !== null && filledContent}
-                    {rightContent === null && unfilledContent}
-                    <Grid item xs={12}>
-                        <Button variant="contained" size="large">
-                            登録
-                        </Button>
-                    </Grid>
-                </Grid>
-            </form>
+                </form>
+            )}
         </>
     )
 }
