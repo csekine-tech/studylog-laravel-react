@@ -1,5 +1,6 @@
 //一つの問題につきplanは一つしか作れない仕様？
 //→過去の
+//TODO RIGHTで使用
 const todoList = [
     {
         workbook_id: 5,
@@ -119,6 +120,7 @@ const todoList = [
     },
 ]
 
+//TODO LEFTで使用
 const date_todo_relations = [
     {
         parent: '今日',
@@ -162,6 +164,7 @@ const date_todo_relations = [
     },
 ]
 
+//library RIGHTで使用する
 const todoListFilteredWorkbook = [
     {
         workbook_id: 5,

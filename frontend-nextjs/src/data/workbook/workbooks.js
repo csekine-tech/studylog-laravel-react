@@ -1,3 +1,4 @@
+
 const workbookInfo = {
     workbook_name: '青チャート1',
     workbook_id: 5,
@@ -9,7 +10,7 @@ const workbookInfo = {
     //     { section: 3, count: 2 },
     // ],
 }
-
+//library edit RIGHTで使用
 const workbookList = [
     {
         workbook_name: '青チャート1',
@@ -17,7 +18,6 @@ const workbookList = [
         subject: '数学',
         subject_id: 1,
         count: 100,
-
         // structure: [
         //     { section: 1, count: 2 },
         //     { section: 2, count: 3 },
@@ -30,7 +30,6 @@ const workbookList = [
         subject: '数学',
         subject_id: 1,
         count: 50,
-
         // structure: [
         //     { section: 1, count: 3 },
         //     { section: 2, count: 3 },
@@ -43,7 +42,6 @@ const workbookList = [
         subject: '化学',
         subject_id: 2,
         count: 10,
-
         // structure: [
         //     { section: 1, count: 1 },
         //     { section: 2, count: 3 },
@@ -56,7 +54,6 @@ const workbookList = [
         subject: '化学',
         subject_id: 2,
         count: 30,
-
         // structure: [
         //     { section: 1, count: 2 },
         //     { section: 2, count: 3 },
@@ -66,6 +63,7 @@ const workbookList = [
     },
 ]
 
+//library LEFTで使用
 const workbook_subject_relations = [
     {
         parent: '数学',
