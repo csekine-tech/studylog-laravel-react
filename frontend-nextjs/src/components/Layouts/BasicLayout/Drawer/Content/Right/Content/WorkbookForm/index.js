@@ -14,6 +14,7 @@ import Button from '@mui/material/Button'
 import { workbookInfo, workbookList } from '@/data/workbook/workbooks'
 import { useIsRightOpenContext } from '@/store/isrightopen-context'
 import { subjectList } from '@/data/subject/subject'
+import Right from '../..'
 
 const WorkbookForm = () => {
     let rightContentData, rightContent
@@ -70,17 +71,18 @@ const WorkbookForm = () => {
     }
     const submitHandler = () => {}
 
-    const workbookSectionCount = rightContent
-        ? rightContentData.structure.length
-        : 0
+    // const workbookSectionCount = rightContent
+    //     ? rightContentData.structure.length
+    //     : 0
     const filledContent = (
         <>
-            {workbookSectionCount !== 0 &&
-                rightContentData.structure.map(group => {
-                    return (
-                        <Grid item xs={12} key={group.section}>
-                            <Grid container spacing={3}>
-                                <Grid item xs={12}>
+            {
+                rightContent && (
+                    // rightContentData.map(group => {
+                    //     return (
+                    <Grid item xs={12}>
+                        <Grid container spacing={3}>
+                            {/* <Grid item xs={12}>
                                     <FormControl fullWidth>
                                         <InputLabel id="demo-simple-select2-label">
                                             章
@@ -102,25 +104,27 @@ const WorkbookForm = () => {
                                             </MenuItem>
                                         </Select>
                                     </FormControl>
-                                </Grid>
-                                <Grid item xs={12}>
-                                    <TextField
-                                        id="outlined-basic"
-                                        label="問題数"
-                                        variant="outlined"
-                                        value={group.count}
-                                        // ref={questionCountInputRef}
-                                    />
-                                </Grid>
+                                </Grid> */}
+                            <Grid item xs={12}>
+                                <TextField
+                                    id="outlined-basic"
+                                    label="問題数"
+                                    variant="outlined"
+                                    value={rightContentData.count}
+                                    // ref={questionCountInputRef}
+                                />
                             </Grid>
                         </Grid>
-                    )
-                })}
+                    </Grid>
+                )
+                //     )
+                // })
+            }
         </>
     )
     const unfilledContent = (
         <>
-            <Grid item xs={12}>
+            {/* <Grid item xs={12}>
                 <FormControl fullWidth>
                     <InputLabel id="demo-simple-select2-label">章</InputLabel>
                     <Select
@@ -137,7 +141,7 @@ const WorkbookForm = () => {
                         </MenuItem>
                     </Select>
                 </FormControl>
-            </Grid>
+            </Grid> */}
             <Grid item xs={12}>
                 <TextField
                     id="outlined-basic"
@@ -179,6 +183,7 @@ const WorkbookForm = () => {
                     </Grid>
                     <Grid item xs={12}>
                         <TextField
+                            fullWidth
                             id="outlined-basic"
                             label="教材名"
                             value={workbookNameInputState}

@@ -2,11 +2,12 @@ const workbookInfo = {
     workbook_name: '青チャート1',
     workbook_id: 5,
     subject: '数学',
-    structure: [
-        { section: 1, count: 2 },
-        { section: 2, count: 3 },
-        { section: 3, count: 2 },
-    ],
+    count: 100,
+    // structure: [
+    //     { section: 1, count: 2 },
+    //     { section: 2, count: 3 },
+    //     { section: 3, count: 2 },
+    // ],
 }
 
 const workbookList = [
@@ -15,45 +16,53 @@ const workbookList = [
         workbook_id: 5,
         subject: '数学',
         subject_id: 1,
-        structure: [
-            { section: 1, count: 2 },
-            { section: 2, count: 3 },
-            { section: 3, count: 2 },
-        ],
+        count: 100,
+
+        // structure: [
+        //     { section: 1, count: 2 },
+        //     { section: 2, count: 3 },
+        //     { section: 3, count: 2 },
+        // ],
     },
     {
         workbook_name: '大学への数学1',
         workbook_id: 4,
         subject: '数学',
         subject_id: 1,
-        structure: [
-            { section: 1, count: 3 },
-            { section: 2, count: 3 },
-            { section: 3, count: 2 },
-        ],
+        count: 50,
+
+        // structure: [
+        //     { section: 1, count: 3 },
+        //     { section: 2, count: 3 },
+        //     { section: 3, count: 2 },
+        // ],
     },
     {
         workbook_name: '新演習',
         workbook_id: 3,
         subject: '化学',
         subject_id: 2,
-        structure: [
-            { section: 1, count: 1 },
-            { section: 2, count: 3 },
-            { section: 3, count: 2 },
-        ],
+        count: 10,
+
+        // structure: [
+        //     { section: 1, count: 1 },
+        //     { section: 2, count: 3 },
+        //     { section: 3, count: 2 },
+        // ],
     },
     {
         workbook_name: 'セミナー',
         workbook_id: 2,
         subject: '化学',
         subject_id: 2,
-        structure: [
-            { section: 1, count: 2 },
-            { section: 2, count: 3 },
-            { section: 3, count: 2 },
-            { section: 4, count: 5 },
-        ],
+        count: 30,
+
+        // structure: [
+        //     { section: 1, count: 2 },
+        //     { section: 2, count: 3 },
+        //     { section: 3, count: 2 },
+        //     { section: 4, count: 5 },
+        // ],
     },
 ]
 
