@@ -5,11 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Subject extends Model
+class TimeToDoAgain extends Model
 {
     use HasFactory;
-    public function workbooks()
+
+    public function user()
     {
-        return $this->hasMany(Workbook::class);
+        return $this->belongsTo(User::class);
     }
 }

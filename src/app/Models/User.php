@@ -41,4 +41,21 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function questions()
+    {
+        return $this->hasManyThrough(Workbook::class, Question::class);
+    }
+    public function workbooks()
+    {
+        return $this->hasMany(Workbook::class);
+    }
+    public function todos()
+    {
+        return $this->hasManyThrough(Workbook::class, Question::class, Todo::class);
+    }
+    public function timetodoagains()
+    {
+        return $this->hasMany(TimeToDoAgain::class);
+    }
 }

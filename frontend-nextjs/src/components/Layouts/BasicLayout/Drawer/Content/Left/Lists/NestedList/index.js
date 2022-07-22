@@ -32,7 +32,7 @@ const NestedList = ({ title, contents }) => {
     const { rightContent, setRightContent } = useIsRightOpenContext()
     const { rightContentData, setRightContentData } = useIsRightOpenContext()
 
-    const handleClick = () => {
+    const handleClick = id => {
         setOpen(!open)
     }
     const handleEditBtnClick = id => {
@@ -51,78 +51,75 @@ const NestedList = ({ title, contents }) => {
     }
     const handleItemClick = id => {
         if (parentPath === 'library') {
-            // setIsRightOpen(true)
-            // setRightContent(id)
-            todoListFilteredWorkbook.forEach(workbook => {
-                if (workbook.workbook_id === id) {
-                    // setRightContentData(workbook)
-                    router.push(`/library/${id}`)
-                }
-            })
+            router.push(`/library/${id}`)
         }
         if (parentPath === 'todo') {
-            // setIsRightOpen(true)
-            // setRightContent(id)
-            todoList.forEach(todos => {
-                if (todos.q_id === id) {
-                    // setRightContentData(todos.todos)
-                    router.push(`/todo/${id}`)
+            router.push(`/todo/${id}`)
 
-                }
-            })
         }
     }
-    const workbookListRender = (
-        <List component="div" disablePadding>
-            {contents.map(content => {
-                return (
-                    <Box
-                        key={content.id}
-                        sx={{
-                            display: 'flex',
-                            flexDirection: 'row',
-                            p: 0,
-                            m: 1,
-                        }}>
+
+    let renderData
+    if (parentPath === 'library') {
+        renderData = (
+            <List component="div" disablePadding>
+                {contents.map(content => {
+                    return (
+                        <Box
+                            key={content.id}
+                            sx={{
+                                display: 'flex',
+                                flexDirection: 'row',
+                                p: 0,
+                                m: 1,
+                            }}>
+                            <ListItemButton
+                                xs={8}
+                                onClick={() => {
+                                    handleItemClick(content.id)
+                                }}>
+                                <ListItemText primary={content.name} />
+                            </ListItemButton>
+                            <Button
+                                xs={4}
+                                sx={{ m: 1 }}
+                                variant="contained"
+                                onClick={() => {
+                                    handleEditBtnClick(content.id)
+                                }}>
+                                編集
+                            </Button>
+                        </Box>
+                    )
+                })}
+            </List>
+        )
+    }
+    if (parentPath === 'todo') {
+        renderData = (
+            <List component="div" disablePadding>
+                {contents.map(content => {
+                    return (
                         <ListItemButton
-                            xs={8}
+                            sx={{ pl: 4 }}
+                            key={content.id}
                             onClick={() => {
                                 handleItemClick(content.id)
                             }}>
-                            <ListItemText primary={content.name} />
+                            <ListItemText
+                                primary={
+                                    content.workbook_name +
+                                    ' ' +
+                                    content.question.number
+                                }
+                            />
                         </ListItemButton>
-                        <Button
-                            xs={4}
-                            sx={{ m: 1 }}
-                            variant="contained"
-                            onClick={() => {
-                                handleEditBtnClick(content.id)
-                            }}>
-                            編集
-                        </Button>
-                    </Box>
-                )
-            })}
-        </List>
-    )
-    const todoListRender = (
-        <List component="div" disablePadding>
-            {contents.map(content => {
-                return (
-                    <ListItemButton
-                        sx={{ pl: 4 }}
-                        key={content.id}
-                        onClick={() => {
-                            handleItemClick(content.id)
-                        }}>
-                        <ListItemText
-                            primary={content.workbook_name + ' ' + content.name}
-                        />
-                    </ListItemButton>
-                )
-            })}
-        </List>
-    )
+                    )
+                })}
+            </List>
+        )
+    }
+
 
     return (
         <>
@@ -131,8 +128,7 @@ const NestedList = ({ title, contents }) => {
                 {open ? <ExpandLess /> : <ExpandMore />}
             </ListItemButton>
             <Collapse in={open} timeout="auto" unmountOnExit>
-                {parentPath === 'library' && workbookListRender}
-                {parentPath === 'todo' && todoListRender}
+                {renderData}
             </Collapse>
         </>
     )

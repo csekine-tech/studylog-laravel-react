@@ -140,7 +140,7 @@ export default function PersistentDrawerLeft({ children }) {
                 </div>
                 {userName}
             </MenuItem>
-            <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+            {/* <MenuItem onClick={handleMenuClose}>My account</MenuItem> */}
             <MenuItem onClick={logout}>logout</MenuItem>
         </Menu>
     )
@@ -170,7 +170,7 @@ export default function PersistentDrawerLeft({ children }) {
                         </Link>
                         <Box sx={{ flexGrow: 1 }} />
                         <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-                            <IconButton
+                            {/* <IconButton
                                 size="large"
                                 aria-label="show 4 new mails"
                                 color="inherit">
@@ -185,7 +185,7 @@ export default function PersistentDrawerLeft({ children }) {
                                 <Badge badgeContent={17} color="error">
                                     <NotificationsIcon />
                                 </Badge>
-                            </IconButton>
+                            </IconButton> */}
                             <IconButton
                                 size="large"
                                 edge="end"

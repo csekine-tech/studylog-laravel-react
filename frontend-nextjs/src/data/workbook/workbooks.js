@@ -13,9 +13,9 @@ const workbookInfo = {
 //library edit RIGHTで使用
 const workbookList = [
     {
-        workbook_name: '青チャート1',
-        workbook_id: 5,
-        subject: '数学',
+        name: '青チャート1',
+        id: 5,
+        subject_name: '数学',
         subject_id: 1,
         count: 100,
         // structure: [

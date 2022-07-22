@@ -52,12 +52,12 @@ const Right = () => {
 
     const todoCollectionRender = (
         <>
-            <Typography variant="h4" component="div">
+            {/* <Typography variant="h4" component="div">
                 {todoCollectiontitle}
             </Typography>
-            <Box sx={{ my: 2 }}>
+            <Box sx={{ my: 2 }}> */}
                 {loading ? <Loading size="full" /> : <TodoCollection />}
-            </Box>
+            {/* </Box> */}
         </>
     )
     const workbookFormRender = (
@@ -76,12 +76,12 @@ const Right = () => {
     )
     const workbookTodoTableRender = (
         <>
-            <Typography variant="h4" component="div">
+            {/* <Typography variant="h4" component="div">
                 {workbookTodoTabletitle}
             </Typography>
-            <Box sx={{ my: 2 }}>
+            <Box sx={{ my: 2 }}> */}
                 {loading ? <Loading size="full" /> : <WorkbookTodoTable />}
-            </Box>
+            {/* </Box> */}
         </>
     )
     const addWorkbookFormRender = (

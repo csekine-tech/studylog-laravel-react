@@ -5,7 +5,9 @@ const todoList = [
     {
         workbook_id: 5,
         workbook_name: '青チャート1',
+        //number
         q_name: '1',
+        //id
         q_id: 1,
         todos: [
             {
@@ -121,58 +123,208 @@ const todoList = [
 ]
 
 //TODO LEFTで使用
-const date_todo_relations = [
-    {
-        parent: '今日',
-        children: [
-            {
-                id: 101,
-                name: '101',
-                workbook_id: 5,
-                workbook_name: '青チャート1',
+const date_todo_relations = {
+    '2022-07-22': [
+        {
+            id: 1,
+            question_id: 1,
+            planned_at: '2022-07-22',
+            done_at: '2022-07-22',
+            rate: 2,
+            created_at: null,
+            updated_at: null,
+            workbook_name: '\u9752\u30c1\u30e3\u30fc\u30c81',
+            question: {
+                id: 1,
+                workbook_id: 1,
+                number: 0,
+                is_finished: 0,
+                created_at: null,
+                updated_at: null,
+                workbook_name: '\u9752\u30c1\u30e3\u30fc\u30c81',
+                workbook: {
+                    id: 1,
+                    name: '\u9752\u30c1\u30e3\u30fc\u30c81',
+                    user_id: 1,
+                    subject_id: 2,
+                    count: 100,
+                    is_finished: 0,
+                    created_at: null,
+                    updated_at: null,
+                    subject_name: '\u6570\u5b66',
+                    subject: {
+                        id: 2,
+                        name: '\u6570\u5b66',
+                        created_at: '2022-07-22T05:56:19.000000Z',
+                        updated_at: '2022-07-22T05:56:19.000000Z',
+                    },
+                },
             },
-            {
-                id: 102,
-                name: '102',
-                workbook_id: 5,
-                workbook_name: '青チャート1',
+        },
+        {
+            id: 2,
+            question_id: 2,
+            planned_at: '2022-07-22',
+            done_at: null,
+            rate: null,
+            created_at: null,
+            updated_at: null,
+            workbook_name: '\u9752\u30c1\u30e3\u30fc\u30c81',
+            question: {
+                id: 2,
+                workbook_id: 1,
+                number: 1,
+                is_finished: 0,
+                created_at: null,
+                updated_at: null,
+                workbook_name: '\u9752\u30c1\u30e3\u30fc\u30c81',
+                workbook: {
+                    id: 1,
+                    name: '\u9752\u30c1\u30e3\u30fc\u30c81',
+                    user_id: 1,
+                    subject_id: 2,
+                    count: 100,
+                    is_finished: 0,
+                    created_at: null,
+                    updated_at: null,
+                    subject_name: '\u6570\u5b66',
+                    subject: {
+                        id: 2,
+                        name: '\u6570\u5b66',
+                        created_at: '2022-07-22T05:56:19.000000Z',
+                        updated_at: '2022-07-22T05:56:19.000000Z',
+                    },
+                },
             },
-            {
-                id: 32,
-                name: '32',
-                workbook_id: 6,
-                workbook_name: '大学への数学A',
+        },
+        {
+            id: 3,
+            question_id: 3,
+            planned_at: '2022-07-22',
+            done_at: null,
+            rate: null,
+            created_at: null,
+            updated_at: null,
+            workbook_name: '\u9752\u30c1\u30e3\u30fc\u30c81',
+            question: {
+                id: 3,
+                workbook_id: 1,
+                number: 2,
+                is_finished: 0,
+                created_at: null,
+                updated_at: null,
+                workbook_name: '\u9752\u30c1\u30e3\u30fc\u30c81',
+                workbook: {
+                    id: 1,
+                    name: '\u9752\u30c1\u30e3\u30fc\u30c81',
+                    user_id: 1,
+                    subject_id: 2,
+                    count: 100,
+                    is_finished: 0,
+                    created_at: null,
+                    updated_at: null,
+                    subject_name: '\u6570\u5b66',
+                    subject: {
+                        id: 2,
+                        name: '\u6570\u5b66',
+                        created_at: '2022-07-22T05:56:19.000000Z',
+                        updated_at: '2022-07-22T05:56:19.000000Z',
+                    },
+                },
             },
-        ],
-    },
-    {
-        parent: '明日',
-        children: [
-            {
-                id: 103,
-                name: '103',
-                workbook_id: 5,
-                workbook_name: '青チャート1',
+        },
+    ],
+    '2022-07-27': [
+        {
+            id: 4,
+            question_id: 1,
+            planned_at: '2022-07-27',
+            done_at: null,
+            rate: null,
+            created_at: null,
+            updated_at: null,
+            workbook_name: '\u9752\u30c1\u30e3\u30fc\u30c81',
+            question: {
+                id: 1,
+                workbook_id: 1,
+                number: 0,
+                is_finished: 0,
+                created_at: null,
+                updated_at: null,
+                workbook_name: '\u9752\u30c1\u30e3\u30fc\u30c81',
+                workbook: {
+                    id: 1,
+                    name: '\u9752\u30c1\u30e3\u30fc\u30c81',
+                    user_id: 1,
+                    subject_id: 2,
+                    count: 100,
+                    is_finished: 0,
+                    created_at: null,
+                    updated_at: null,
+                    subject_name: '\u6570\u5b66',
+                    subject: {
+                        id: 2,
+                        name: '\u6570\u5b66',
+                        created_at: '2022-07-22T05:56:19.000000Z',
+                        updated_at: '2022-07-22T05:56:19.000000Z',
+                    },
+                },
             },
-            {
-                id: 104,
-                name: '104',
-                workbook_id: 5,
-                workbook_name: '青チャート1',
-            },
-        ],
-    },
-]
+        },
+    ],
+}
+// [
+//     {
+//         parent: '今日',
+//         children: [
+//             {
+//                 id: 101,
+//                 name: '101',
+//                 workbook_id: 5,
+//                 workbook_name: '青チャート1',
+//             },
+//             {
+//                 id: 102,
+//                 name: '102',
+//                 workbook_id: 5,
+//                 workbook_name: '青チャート1',
+//             },
+//             {
+//                 id: 32,
+//                 name: '32',
+//                 workbook_id: 6,
+//                 workbook_name: '大学への数学A',
+//             },
+//         ],
+//     },
+//     {
+//         parent: '明日',
+//         children: [
+//             {
+//                 id: 103,
+//                 name: '103',
+//                 workbook_id: 5,
+//                 workbook_name: '青チャート1',
+//             },
+//             {
+//                 id: 104,
+//                 name: '104',
+//                 workbook_id: 5,
+//                 workbook_name: '青チャート1',
+//             },
+//         ],
+//     },
+// ]
 
 //library RIGHTで使用する
 const todoListFilteredWorkbook = [
     {
-        workbook_id: 5,
-        workbook_name: '青チャート1',
+        id: 5,
+        name: '青チャート1',
         questions: [
             {
                 id: 1,
-                name: '1',
+                number: 1,
                 todos: [
                     {
                         id: 1,
@@ -190,7 +342,7 @@ const todoListFilteredWorkbook = [
             },
             {
                 id: 2,
-                name: '2',
+                number: 2,
                 todos: [
                     {
                         id: 3,
@@ -208,7 +360,7 @@ const todoListFilteredWorkbook = [
             },
             {
                 id: 3,
-                name: '3',
+                number: 3,
                 todos: [
                     {
                         id: 5,
@@ -220,7 +372,7 @@ const todoListFilteredWorkbook = [
             },
             {
                 id: 4,
-                name: '4',
+                number: 4,
                 todos: [
                     {
                         id: 3,
@@ -238,7 +390,7 @@ const todoListFilteredWorkbook = [
         questions: [
             {
                 id: 1,
-                name: '1',
+                number: 1,
                 todos: [
                     {
                         id: 1,
@@ -256,7 +408,7 @@ const todoListFilteredWorkbook = [
             },
             {
                 id: 2,
-                name: '2',
+                number: 2,
                 todos: [
                     {
                         id: 3,
@@ -274,7 +426,7 @@ const todoListFilteredWorkbook = [
             },
             {
                 id: 3,
-                name: '3',
+                number: 3,
                 todos: [
                     {
                         id: 5,
@@ -286,7 +438,7 @@ const todoListFilteredWorkbook = [
             },
             {
                 id: 4,
-                name: '4',
+                number: 4,
                 todos: [
                     {
                         id: 3,
@@ -304,7 +456,7 @@ const todoListFilteredWorkbook = [
         questions: [
             {
                 id: 1,
-                name: '1',
+                number: 1,
                 todos: [
                     {
                         id: 1,
@@ -322,7 +474,7 @@ const todoListFilteredWorkbook = [
             },
             {
                 id: 2,
-                name: '2',
+                number: 2,
                 todos: [
                     {
                         id: 3,
@@ -340,7 +492,7 @@ const todoListFilteredWorkbook = [
             },
             {
                 id: 3,
-                name: '3',
+                number: 3,
                 todos: [
                     {
                         id: 5,
@@ -352,7 +504,7 @@ const todoListFilteredWorkbook = [
             },
             {
                 id: 4,
-                name: '4',
+                number: 4,
                 todos: [
                     {
                         id: 3,
@@ -370,7 +522,7 @@ const todoListFilteredWorkbook = [
         questions: [
             {
                 id: 1,
-                name: '1',
+                number: 1,
                 todos: [
                     {
                         id: 1,
@@ -388,7 +540,7 @@ const todoListFilteredWorkbook = [
             },
             {
                 id: 2,
-                name: '2',
+                number: 2,
                 todos: [
                     {
                         id: 3,
@@ -406,7 +558,7 @@ const todoListFilteredWorkbook = [
             },
             {
                 id: 3,
-                name: '3',
+                number: 3,
                 todos: [
                     {
                         id: 5,
@@ -418,7 +570,7 @@ const todoListFilteredWorkbook = [
             },
             {
                 id: 4,
-                name: '4',
+                number: 4,
                 todos: [
                     {
                         id: 3,
