@@ -40,9 +40,9 @@ Route::get('/workbooklist', [WorkbookController::class, 'getWorkbookList'])
     ->name('workbooks');
 
 Route::get('/todo_date', [TodoController::class, 'getTodoDateRelations'])
-    // ->middleware('auth')
+    ->middleware('auth')
     ->name('todos.daterelations');
 
 Route::get('/workbook_subject', [WorkbookController::class, 'getWorkbookSubjectRelations'])
-    // ->middleware('auth')
+    ->middleware('auth')
     ->name('workbook.subjectrelations');
