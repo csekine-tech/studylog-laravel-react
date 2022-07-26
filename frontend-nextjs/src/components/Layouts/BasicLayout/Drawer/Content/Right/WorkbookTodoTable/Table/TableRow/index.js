@@ -57,7 +57,7 @@ const MyTableRow = ({
             <TableCell align="center">
                 {!finished && (
                     <RatingStars
-                        value={planRateState}
+                        rate={planRateState}
                         onChange={rate => {
                             setPlanRateState(rate)
                             rateChangeHandler(rate, plannedTodoId, plannedAt)

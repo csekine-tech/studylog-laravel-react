@@ -24,7 +24,6 @@ const TodoCollection = () => {
 
     const rateChangeHandler = newRate => {
         setPlanRate(newRate)
-        console.log(planList ? planList[0].planned_at : null);
         //POST TODO
         updateTodo(
             {

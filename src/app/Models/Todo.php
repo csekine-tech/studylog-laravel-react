@@ -10,7 +10,7 @@ class Todo extends Model
     use HasFactory;
     public function workbook()
     {
-        return $this->hasOneThrough(Question::class, Workbook::class);
+        return $this->hasOneThrough(Question::class, Workbook::class, User::class);
     }
     public function question()
     {
