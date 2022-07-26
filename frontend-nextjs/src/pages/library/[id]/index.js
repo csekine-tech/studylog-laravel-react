@@ -1,5 +1,4 @@
 import { useRouter } from 'next/router'
-import BasicLayout from '@/components/Layouts/BasicLayout'
 import Content from '@/components/Layouts/BasicLayout/Drawer/Content'
 
 const LibraryDetail = () => {
@@ -7,7 +6,7 @@ const LibraryDetail = () => {
     const { id } = router.query
     return (
         <>
-            <BasicLayout><Content /></BasicLayout>
+            <Content />
         </>
     )
 }

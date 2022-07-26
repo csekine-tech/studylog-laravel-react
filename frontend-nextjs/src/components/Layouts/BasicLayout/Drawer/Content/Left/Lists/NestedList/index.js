@@ -50,6 +50,7 @@ const NestedList = ({ title, contents }) => {
                             question_id={content.question_id}
                             question_number={content.question.number}
                             done_at={content.done_at}
+                            planned_at={content.planned_at}
                         />
                     )
                 })}

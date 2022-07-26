@@ -15,15 +15,7 @@ export default function Home() {
 
     return (
         <>
-            <Head>
-                <title>Study Log</title>
-            </Head>
-            {!user && <GuestLayout>TOPページ（ゲストレイアウト）</GuestLayout>}
-            {user && (
-                <BasicLayout>
-                    <p>top</p>
-                </BasicLayout>
-            )}
+
         </>
     )
 }

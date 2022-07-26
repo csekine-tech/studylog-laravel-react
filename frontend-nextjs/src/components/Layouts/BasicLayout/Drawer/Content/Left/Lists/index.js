@@ -39,7 +39,6 @@ const Lists = () => {
     } else if (parentPath === 'todo') {
         lists = todoDateRelations
     }
-    console.log(lists)
 
     const listItems = Object.keys(lists).map(key => {
         return <NestedList key={key} title={key} contents={lists[key]} />

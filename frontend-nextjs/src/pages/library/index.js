@@ -1,11 +1,6 @@
-import BasicLayout from '@/components/Layouts/BasicLayout'
 import Content from '@/components/Layouts/BasicLayout/Drawer/Content'
 
 const Library = () => {
-    return (
-        <BasicLayout>
-            <Content />
-        </BasicLayout>
-    )
+    return <Content />
 }
 export default Library

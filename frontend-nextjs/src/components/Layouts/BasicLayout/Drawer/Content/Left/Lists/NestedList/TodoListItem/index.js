@@ -2,6 +2,7 @@ import { useRouter } from 'next/router'
 import { useState, useCallback, useEffect } from 'react'
 import ListItemButton from '@mui/material/ListItemButton'
 import ListItemText from '@mui/material/ListItemText'
+import isPast from '@/../functions/date-compare'
 
 const TodoListItem = ({
     id,
@@ -9,10 +10,12 @@ const TodoListItem = ({
     question_id,
     question_number,
     done_at,
+    planned_at,
 }) => {
     const router = useRouter()
 
     const [isDone, setIsDone] = useState(false)
+
     useEffect(() => {
         if (done_at !== null) {
             setIsDone(true)
@@ -21,6 +24,15 @@ const TodoListItem = ({
 
     const handleItemClick = id => {
         router.push(`/todo/${id}`)
+    }
+    const color = () => {
+        if (isDone) {
+            return 'gray'
+        } else if (isPast(new Date(planned_at), new Date())) {
+            return 'red'
+        } else {
+            return 'initial'
+        }
     }
     return (
         <ListItemButton
@@ -33,7 +45,7 @@ const TodoListItem = ({
                 primary={workbook_name + ' ' + question_number}
                 sx={{
                     textDecoration: isDone ? 'line-through' : 'none',
-                    color: isDone ? 'gray' : 'initial',
+                    color: color,
                 }}
             />
         </ListItemButton>

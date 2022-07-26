@@ -127,7 +127,12 @@ class TodoController extends Controller
     }
     public function getTodoDateRelations()
     {
+        //done_at===nullのものは残す、done_at!==nullで今日より前のものは取得しない
         $relations = Todo::where('user_id', Auth::user()->id)->whereDate('planned_at', '<=', Carbon::now()->addDay(7))
+            ->where('done_at', null)
+            ->orWhere(function ($e) {
+                $e->whereDate('planned_at', '>=', Carbon::now());
+            })
             ->orderBy('planned_at', 'asc')
             ->get()
             ->groupBy(['planned_at']);
