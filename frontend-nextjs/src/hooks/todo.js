@@ -44,7 +44,6 @@ export const useTodo = () => {
         axios
             .get('/api/todo_date')
             .then(res => {
-                console.log(res.data);
                 setTodoDateRelations(res.data.todo_date_relations)
             })
             .catch(error => {

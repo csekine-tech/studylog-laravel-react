@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import NestedList from './NestedList'
 import List from '@mui/material/List'
 import { useIsRightOpenContext } from '@/store/isrightopen-context'
@@ -15,22 +15,31 @@ const Lists = () => {
     const [workbookSubjectRelations, setWorkbookSubjectRelations] = useState([])
     const { getWorkbookSubjectRelations } = useWorkbook()
 
-    useEffect(() => {
-        getTodoDateRelations({ setTodoDateRelations })
-        getWorkbookSubjectRelations({ setWorkbookSubjectRelations })
-    }, [])
-
     const handleFormOpen = () => {
         router.push('/library/add')
     }
     const path = useRouter().pathname
     const parentPath = path.split('/')[1]
     let lists
+
+    useEffect(() => {
+        let isMounted = true
+        if (parentPath === 'library') {
+            getWorkbookSubjectRelations({ setWorkbookSubjectRelations })
+        } else if (parentPath === 'todo') {
+            getTodoDateRelations({ setTodoDateRelations })
+        }
+        return () => {
+            isMounted = false
+        }
+    }, [])
+
     if (parentPath === 'library') {
         lists = workbookSubjectRelations
     } else if (parentPath === 'todo') {
         lists = todoDateRelations
     }
+    console.log(lists)
 
     const listItems = Object.keys(lists).map(key => {
         return <NestedList key={key} title={key} contents={lists[key]} />
@@ -44,8 +53,7 @@ const Lists = () => {
                     bgcolor: 'background.paper',
                 }}
                 component="nav"
-                aria-labelledby="nested-list-subheader"
-            >
+                aria-labelledby="nested-list-subheader">
                 {listItems}
             </List>
             <Button onClick={handleFormOpen}>+</Button>

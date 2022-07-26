@@ -38,6 +38,7 @@ const TodoCollection = () => {
     useEffect(() => {
         getTodoList({ setTodoList })
     }, [])
+
     useEffect(() => {
         todoList.length !== 0 && setLoading(false)
     }, [todoList])

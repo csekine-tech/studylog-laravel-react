@@ -25,7 +25,6 @@ const WorkbookForm = () => {
     const id = Number(router.query.id)
     rightContent = path === '/library/[id]/edit' ? id : null
 
-    useEffect(() => {}, [])
 
     const [subjectList, setSubjectList] = useState([])
     const { getSubjectList } = useSubject()
@@ -34,6 +33,7 @@ const WorkbookForm = () => {
         getSubjectList({ setSubjectList })
         getWorkbookList({ setWorkbookList })
     }, [])
+
     useEffect(() => {
         if (id) {
             subjectList.length !== 0 && workbookList.length !== 0
