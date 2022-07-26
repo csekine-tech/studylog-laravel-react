@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Workbook;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Subject;
 
 class WorkbookController extends Controller
 {
@@ -51,7 +53,18 @@ class WorkbookController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $workbook = new Workbook;
+        $workbook->name = $request->input('name');
+        $workbook->subject_id = Subject::where('name', '=', $request->input('subject_name'))->first()->id;
+        $workbook->user_id = Auth::id();
+        $workbook->count = $request->input('count');
+        $workbook->save();
+        //questionも自動生成する
+
+        return response()->json([
+            'status' => 200,
+            'message' => 'store workbook successfully!'
+        ]);
     }
 
     /**
@@ -85,6 +98,12 @@ class WorkbookController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Workbook::find($id)->delete();
+        //questionも自動削除する
+        return response()->json([
+            'status' => 200,
+            'id'=>$id,
+            'message' => 'workbook removed successfully!'
+        ]);
     }
 }

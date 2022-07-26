@@ -19,7 +19,9 @@ export const useWorkbook = ({} = {}) => {
                 setErrors(Object.values(error.response.data.errors).flat())
             })
     }
-    const getWorkbookSubjectRelations = async ({ setWorkbookSubjectRelations}) => {
+    const getWorkbookSubjectRelations = async ({
+        setWorkbookSubjectRelations,
+    }) => {
         await csrf()
         axios
             .get('/api/workbook_subject')
@@ -33,8 +35,38 @@ export const useWorkbook = ({} = {}) => {
             })
     }
 
+    const storeWorkbook = async workbook => {
+        await csrf()
+        axios
+            .post('/api/workbook/store', workbook)
+            .then(res => {
+                res.data
+            })
+            .catch(error => {
+                if (error.response.status !== 422) throw error
+
+                setErrors(Object.values(error.response.data.errors).flat())
+            })
+    }
+
+    const destroyWorkbook = async id => {
+        await csrf()
+        axios
+            .post(`/api/workbook/destroy/${id}`)
+            .then(res => {
+                res.data
+            })
+            .catch(error => {
+                if (error.response.status !== 422) throw error
+
+                setErrors(Object.values(error.response.data.errors).flat())
+            })
+    }
+
     return {
         getWorkbookList,
         getWorkbookSubjectRelations,
+        storeWorkbook,
+        destroyWorkbook,
     }
 }

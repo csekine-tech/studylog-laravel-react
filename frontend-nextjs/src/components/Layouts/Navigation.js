@@ -17,20 +17,16 @@ const Navigation = ({ user }) => {
 
     return (
         <nav className="bg-white border-b border-gray-100">
-            {/* Primary Navigation Menu */}
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between h-16">
                     <div className="flex">
-                        {/* Logo */}
                         <div className="flex-shrink-0 flex items-center">
                             <Link href="/dashboard">
                                 <a>
-                                    {/* <ApplicationLogo className="block h-10 w-auto fill-current text-gray-600" /> */}
                                 </a>
                             </Link>
                         </div>
 
-                        {/* Navigation Links */}
                         <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                             <NavLink
                                 href="/dashboard"
@@ -40,7 +36,6 @@ const Navigation = ({ user }) => {
                         </div>
                     </div>
 
-                    {/* Settings Dropdown */}
                     <div className="hidden sm:flex sm:items-center sm:ml-6">
                         <Dropdown
                             align="right"
@@ -64,14 +59,12 @@ const Navigation = ({ user }) => {
                                 </button>
                             }>
 
-                            {/* Authentication */}
                             <DropdownButton onClick={logout}>
                                 Logout
                             </DropdownButton>
                         </Dropdown>
                     </div>
 
-                    {/* Hamburger */}
                     <div className="-mr-2 flex items-center sm:hidden">
                         <button
                             onClick={() => setOpen(open => !open)}

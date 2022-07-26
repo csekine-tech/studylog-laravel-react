@@ -22,4 +22,20 @@ class Question extends Model
     {
         return $this->workbook->name;
     }
+    public static function boot()
+    {
+        parent::boot();
+
+        static::created(function ($question) {
+            $todo = new Todo;
+            $todo->question_id = $question->id;
+            $todo->save();
+        });
+
+        // static::deleting(function ($workbook) {
+        //     $workbook->questions->each(function($question){
+        //         $question->delete();
+        //     });
+        // });
+    }
 }

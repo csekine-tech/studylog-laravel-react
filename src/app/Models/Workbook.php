@@ -27,4 +27,24 @@ class Workbook extends Model
         return $this->subject->name;
     }
 
+    public static function boot()
+    {
+        parent::boot();
+
+        static::created(function ($workbook) {
+            $count = $workbook->count;
+            for ($i = 1; $i <= $count; $i++) {
+                $question = new Question;
+                $question->workbook_id = $workbook->id;
+                $question->number = $i;
+                $question->save();
+            }
+        });
+
+        static::deleting(function ($workbook) {
+            $workbook->questions->each(function($question){
+                $question->delete();
+            });
+        });
+    }
 }

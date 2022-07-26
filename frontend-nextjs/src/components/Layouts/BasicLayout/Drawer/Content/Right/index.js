@@ -19,8 +19,6 @@ const Right = () => {
     const path = router.pathname
     const id = router.query.id ? Number(router.query.id) : ''
     const qid = router.query.qid ? Number(router.query.qid) : ''
-    const { isRightOpen, setIsRightOpen } = useIsRightOpenContext()
-    const { rightContent, setRightContent } = useIsRightOpenContext()
 
     let todoCollectiontitle, workbookTodoTabletitle
 
@@ -51,14 +49,7 @@ const Right = () => {
     }, [todoList, workbookList])
 
     const todoCollectionRender = (
-        <>
-            {/* <Typography variant="h4" component="div">
-                {todoCollectiontitle}
-            </Typography>
-            <Box sx={{ my: 2 }}> */}
-                {loading ? <Loading size="full" /> : <TodoCollection />}
-            {/* </Box> */}
-        </>
+        <>{loading ? <Loading size="full" /> : <TodoCollection />}</>
     )
     const workbookFormRender = (
         <>
@@ -75,14 +66,7 @@ const Right = () => {
         </>
     )
     const workbookTodoTableRender = (
-        <>
-            {/* <Typography variant="h4" component="div">
-                {workbookTodoTabletitle}
-            </Typography>
-            <Box sx={{ my: 2 }}> */}
-                {loading ? <Loading size="full" /> : <WorkbookTodoTable />}
-            {/* </Box> */}
-        </>
+        <>{loading ? <Loading size="full" /> : <WorkbookTodoTable />}</>
     )
     const addWorkbookFormRender = (
         <>

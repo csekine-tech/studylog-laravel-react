@@ -8,6 +8,8 @@ import { useTodo } from '@/hooks/todo'
 import Loading from '@/components/ui/Loading'
 import Typography from '@mui/material/Typography'
 import { Box } from '@mui/system'
+import { Today } from '@mui/icons-material'
+import dateFormat from '@/../functions/date-format'
 
 const TodoCollection = () => {
     const router = useRouter()
@@ -17,13 +19,27 @@ const TodoCollection = () => {
     const [todoList, setTodoList] = useState([])
     const { getTodoList } = useTodo()
     const [loading, setLoading] = useState(true)
+    const [planRate, setPlanRate] = useState(0)
+    const { updateTodo } = useTodo()
+
+    const rateChangeHandler = newRate => {
+        setPlanRate(newRate)
+        console.log(planList ? planList[0].planned_at : null);
+        //POST TODO
+        updateTodo(
+            {
+                planned_at: planList ? planList[0].planned_at : null,
+                done_at: dateFormat(new Date()),
+                rate: newRate,
+            },
+            planList[0].id,
+        )
+    }
 
     useEffect(() => {
         getTodoList({ setTodoList })
-        console.log(todoList)
     }, [])
     useEffect(() => {
-        console.log(todoList)
         todoList.length !== 0 && setLoading(false)
     }, [todoList])
 
@@ -51,7 +67,8 @@ const TodoCollection = () => {
             <Card
                 key={count}
                 date={plan.planned_at}
-                rate=""
+                rate={planRate}
+                onChange={rateChangeHandler}
                 count={count}
                 type="plan"
             />
@@ -69,6 +86,7 @@ const TodoCollection = () => {
             />
         )
     })
+
 
     return (
         <>

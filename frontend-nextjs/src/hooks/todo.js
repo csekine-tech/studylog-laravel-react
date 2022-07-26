@@ -4,7 +4,7 @@ import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { useAuth } from './auth'
 
-export const useTodo = ({} = {}) => {
+export const useTodo = () => {
     const router = useRouter()
 
     const csrf = () => axios.get('/sanctum/csrf-cookie')
@@ -23,7 +23,9 @@ export const useTodo = ({} = {}) => {
             })
     }
 
-    const getTodoListFilteredWorkbook = async ({ setTodoListFilteredWorkbook }) => {
+    const getTodoListFilteredWorkbook = async ({
+        setTodoListFilteredWorkbook,
+    }) => {
         await csrf()
         axios
             .get('/api/todolistfilteredworkbook')
@@ -37,7 +39,7 @@ export const useTodo = ({} = {}) => {
             })
     }
 
-    const getTodoDateRelations = async ({ setTodoDateRelations}) => {
+    const getTodoDateRelations = async ({ setTodoDateRelations }) => {
         await csrf()
         axios
             .get('/api/todo_date')
@@ -51,9 +53,25 @@ export const useTodo = ({} = {}) => {
             })
     }
 
+    const updateTodo = async (todo, id) => {
+        await csrf()
+        axios
+            .post(`/api/todo/update/${id}`, todo)
+            .then(res => {
+                res.data
+                console.log(res.data);
+            })
+            .catch(error => {
+                if (error.response.status !== 422) throw error
+
+                setErrors(Object.values(error.response.data.errors).flat())
+            })
+    }
+
     return {
         getTodoList,
         getTodoListFilteredWorkbook,
-        getTodoDateRelations
+        getTodoDateRelations,
+        updateTodo,
     }
 }

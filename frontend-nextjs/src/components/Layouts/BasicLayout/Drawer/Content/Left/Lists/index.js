@@ -4,24 +4,17 @@ import NestedList from './NestedList'
 import List from '@mui/material/List'
 import { useIsRightOpenContext } from '@/store/isrightopen-context'
 import { Button } from '@mui/material'
-// import {
-//     workbookList,
-//     workbook_subject_relations,
-// } from '@/data/workbook/workbooks'
-// import { date_todo_relations } from '@/data/todo/todo'
 import { useTodo } from '@/hooks/todo'
 import { useWorkbook } from '@/hooks/workbook'
 
 const Lists = () => {
     const router = useRouter()
 
-    const { isRightOpen, setIsRightOpen } = useIsRightOpenContext()
-    const { rightContent, setRightContent } = useIsRightOpenContext()
-    const { rightContentData, setRightContentData } = useIsRightOpenContext()
     const [todoDateRelations, setTodoDateRelations] = useState([])
     const { getTodoDateRelations } = useTodo()
     const [workbookSubjectRelations, setWorkbookSubjectRelations] = useState([])
     const { getWorkbookSubjectRelations } = useWorkbook()
+
     useEffect(() => {
         getTodoDateRelations({ setTodoDateRelations })
         getWorkbookSubjectRelations({ setWorkbookSubjectRelations })

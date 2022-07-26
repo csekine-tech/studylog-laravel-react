@@ -9,42 +9,4 @@ const TodoDetail = () => {
     return <BasicLayout><Content /></BasicLayout>
 }
 
-
-export async function getStaticPaths() {
-    return {
-        paths: [
-            {
-                params: {
-                    qid: '1',
-                },
-            },
-            {
-                params: {
-                    qid: '101',
-                },
-            },
-            {
-                params: {
-                    qid: '102',
-                },
-            },
-            {
-                params: {
-                    qid: '103',
-                },
-            },
-        ],
-        fallback: true,
-    }
-}
-
-export async function getStaticProps(context) {
-    const id = context.params.qid
-
-    return {
-        props: {},
-    }
-}
-
-
 export default TodoDetail

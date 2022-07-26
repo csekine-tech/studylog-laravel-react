@@ -14,7 +14,6 @@ const BasicLayout = ({ children }) => {
     return (
         <>
                 <Drawer>
-                    {/* <Content /> */}
                     {children}
                 </Drawer>
         </>

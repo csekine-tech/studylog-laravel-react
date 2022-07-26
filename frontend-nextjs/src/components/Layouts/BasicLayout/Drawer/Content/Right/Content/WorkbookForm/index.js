@@ -17,7 +17,7 @@ const WorkbookForm = () => {
     let rightContentData, rightContent
 
     const [workbookList, setWorkbookList] = useState([])
-    const { getWorkbookList } = useWorkbook()
+    const { getWorkbookList, storeWorkbook, destroyWorkbook } = useWorkbook()
     const [filtering, setFiltering] = useState(false)
     const [loading, setLoading] = useState(true)
     const router = useRouter()
@@ -33,13 +33,16 @@ const WorkbookForm = () => {
     useEffect(() => {
         getSubjectList({ setSubjectList })
         getWorkbookList({ setWorkbookList })
-
-        console.log(workbookList)
     }, [])
     useEffect(() => {
-        subjectList.length !== 0 && workbookList.length !== 0
-            ? setLoading(false)
-            : ''
+        if (id) {
+            subjectList.length !== 0 && workbookList.length !== 0
+                ? setLoading(false)
+                : ''
+        } else {
+            subjectList.length !== 0 ? setLoading(false) : ''
+        }
+
         workbookList.length !== 0 &&
             workbookList.forEach(workbook => {
                 if (workbook.id === id) {
@@ -64,15 +67,6 @@ const WorkbookForm = () => {
     const [workbookCountInputState, setWorkbookCountInputState] = useState(
         rightContentData ? rightContentData.count : '',
     )
-    // const [sectionInputState, setSectionInputState] = useState(
-    //     workbookList.section,
-    // )
-
-    // useEffect(() => {
-    //     setSubjectInputState(rightContent ? rightContentData.subject_name : '')
-    //     setWorkbookNameInputState(rightContent ? rightContentData.name : '')
-    //     setSectionInputState(rightContent ? rightContentData.section : '')
-    // }, [rightContent])
 
     const subjectInputChangeHandler = e => {
         e.preventDefault()
@@ -86,46 +80,29 @@ const WorkbookForm = () => {
         e.preventDefault()
         setWorkbookCountInputState(e.target.value)
     }
-    // const sectionInputChangeHandler = e => {
-    //     e.preventDefault()
-    //     setSubjectInputState(e.target.value)
-    // }
-    const submitHandler = () => {}
 
-    // const workbookSectionCount = rightContent
-    //     ? rightContentData.structure.length
-    //     : 0
+    const submitHandler = async e => {
+        e.preventDefault()
+        storeWorkbook({
+            name: workbookNameInputState,
+            count: workbookCountInputState,
+            subject_name: subjectInputState,
+        })
+        getWorkbookList({ setWorkbookList })
+    }
+
+    const workbookDestroyHandler = async e => {
+        alert('関連するTodoも削除されます。本当に削除してよろしいですか？')
+        destroyWorkbook(id)
+        router.push('/library')
+        getWorkbookList({ setWorkbookList })
+    }
+
     const filledContent = (
         <>
             {
-                // rightContent && (
-                // rightContentData.map(group => {
-                //     return (
                 <Grid item xs={12}>
                     <Grid container spacing={3}>
-                        {/* <Grid item xs={12}>
-                                    <FormControl fullWidth>
-                                        <InputLabel id="demo-simple-select2-label">
-                                            章
-                                        </InputLabel>
-                                        <Select
-                                            labelId="demo-simple-select2-label"
-                                            id="demo-simple-select2"
-                                            // ref={sectionInputRef}
-                                            label="章"
-                                            value={group.section}
-                                            onChange={
-                                                sectionInputChangeHandler
-                                            }>
-                                            <MenuItem
-                                                value={group.section}
-                                                // key={group.section}
-                                            >
-                                                {group.section}
-                                            </MenuItem>
-                                        </Select>
-                                    </FormControl>
-                                </Grid> */}
                         <Grid item xs={12}>
                             <TextField
                                 id="outlined-basic"
@@ -136,46 +113,17 @@ const WorkbookForm = () => {
                                         ? rightContentData.count
                                         : ''
                                 }
-                                // ref={questionCountInputRef}
                             />
                         </Grid>
                     </Grid>
                 </Grid>
-                // )
-                //     )
-                // })
             }
         </>
     )
     const unfilledContent = (
         <>
-            {/* <Grid item xs={12}>
-                <FormControl fullWidth>
-                    <InputLabel id="demo-simple-select2-label">章</InputLabel>
-                    <Select
-                        labelId="demo-simple-select2-label"
-                        id="demo-simple-select2"
-                        // ref={sectionInputRef}
-                        label="章"
-                        onChange={sectionInputChangeHandler}>
-                        <MenuItem value={0} key={0}>
-                            なし
-                        </MenuItem>
-                        <MenuItem value={1} key={1}>
-                            1
-                        </MenuItem>
-                    </Select>
-                </FormControl>
-            </Grid> */}
             <Grid item xs={12}>
-                <TextField
-                    id="outlined-basic"
-                    label="問題数"
-                    variant="outlined"
-                    // ref={questionCountInputRef}
-                    // value={}
-                    // onChange={}
-                />
+                <TextField id="count" label="問題数" variant="outlined" />
             </Grid>
         </>
     )
@@ -189,12 +137,10 @@ const WorkbookForm = () => {
                     <Grid container spacing={3}>
                         <Grid item xs={12}>
                             <FormControl fullWidth>
-                                <InputLabel id="demo-simple-select-label">
-                                    科目
-                                </InputLabel>
+                                <InputLabel id="subject-label">科目</InputLabel>
                                 <Select
-                                    labelId="demo-simple-select-label"
-                                    id="demo-simple-select"
+                                    labelId="subject-label"
+                                    id="subject"
                                     // ref={subjectInputRef}
                                     label="科目"
                                     value={subjectInputState}
@@ -214,45 +160,18 @@ const WorkbookForm = () => {
                         <Grid item xs={12}>
                             <TextField
                                 fullWidth
-                                id="outlined-basic"
+                                id="workbook_name"
                                 label="教材名"
                                 value={workbookNameInputState}
                                 onChange={workbookNameInputChangeHandler}
                                 variant="outlined"
-                                // ref={workbookNameInputRef}
                             />
                         </Grid>
-                        {/* {rightContent !== null && filledContent} */}
-                        {/* {rightContent === null && unfilledContent} */}
-                        {/* {filledContent} */}
                         <Grid item xs={12}>
                             <Grid container spacing={3}>
-                                {/* <Grid item xs={12}>
-                                    <FormControl fullWidth>
-                                        <InputLabel id="demo-simple-select2-label">
-                                            章
-                                        </InputLabel>
-                                        <Select
-                                            labelId="demo-simple-select2-label"
-                                            id="demo-simple-select2"
-                                            // ref={sectionInputRef}
-                                            label="章"
-                                            value={group.section}
-                                            onChange={
-                                                sectionInputChangeHandler
-                                            }>
-                                            <MenuItem
-                                                value={group.section}
-                                                // key={group.section}
-                                            >
-                                                {group.section}
-                                            </MenuItem>
-                                        </Select>
-                                    </FormControl>
-                                </Grid> */}
                                 <Grid item xs={12}>
                                     <TextField
-                                        id="outlined-basic"
+                                        id="count"
                                         label="問題数"
                                         variant="outlined"
                                         value={workbookCountInputState}
@@ -264,8 +183,17 @@ const WorkbookForm = () => {
                             </Grid>
                         </Grid>
                         <Grid item xs={12}>
-                            <Button variant="contained" size="large">
+                            <Button
+                                variant="contained"
+                                size="large"
+                                type="submit">
                                 登録
+                            </Button>
+                            <Button
+                                variant="contained"
+                                size="large"
+                                onClick={workbookDestroyHandler}>
+                                削除
                             </Button>
                         </Grid>
                     </Grid>

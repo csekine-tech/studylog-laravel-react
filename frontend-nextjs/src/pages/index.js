@@ -7,7 +7,7 @@ import BasicLayout from '@/components/Layouts/BasicLayout'
 // import { useWorkbook } from '@/hooks/workbook'
 
 export default function Home() {
-    const { user } = useAuth({ middleware: 'guest' })
+    const { user } = useAuth({ })
     // const [workbookList, setWorkbookList] = useState([])
     // const { getWorkbookList } = useWorkbook()
     // getWorkbookList({setWorkbookList});

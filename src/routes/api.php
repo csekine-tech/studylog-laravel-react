@@ -46,3 +46,15 @@ Route::get('/todo_date', [TodoController::class, 'getTodoDateRelations'])
 Route::get('/workbook_subject', [WorkbookController::class, 'getWorkbookSubjectRelations'])
     ->middleware('auth')
     ->name('workbook.subjectrelations');
+
+Route::post('/workbook/store', [WorkbookController::class, 'store'])
+    ->middleware('auth')
+    ->name('workbook.store');
+
+Route::post('/workbook/destroy/{id}', [WorkbookController::class, 'destroy'])
+    ->middleware('auth')
+    ->name('workbook.destroy');
+
+Route::post('/todo/update/{id}', [TodoController::class, 'update'])
+    ->middleware('auth')
+    ->name('todo.update');

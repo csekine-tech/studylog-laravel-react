@@ -16,19 +16,19 @@ class QuestionsTableSeeder extends Seeder
      */
     public function run()
     {
-        for ($i = 0; $i <= 100; $i++) {
+        for ($i = 1; $i <= 100; $i++) {
             DB::table('questions')->insert([
                 'workbook_id' => 1,
                 'number' => $i,
             ]);
         }
-        for ($i = 0; $i <= 50; $i++) {
+        for ($i = 1; $i <= 50; $i++) {
             DB::table('questions')->insert([
                 'workbook_id' => 2,
                 'number' => $i,
             ]);
         }
-        for ($i = 0; $i <= 50; $i++) {
+        for ($i = 1; $i <= 50; $i++) {
             DB::table('questions')->insert([
                 'workbook_id' => 3,
                 'number' => $i,

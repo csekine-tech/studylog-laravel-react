@@ -3,7 +3,8 @@ import RatingStars from '@/components/ui/RatingStars'
 import { Typography } from '@mui/material'
 import { Grid } from '@mui/material'
 
-const Card = ({ date, rate, count, type }) => {
+const Card = ({ date, rate, count, type, onChange, initialRate }) => {
+
     const planTitle = type === 'plan' ? '予定' : '解いた日'
     return (
         <>
@@ -24,6 +25,8 @@ const Card = ({ date, rate, count, type }) => {
                             edit={type === 'plan' ? true : false}
                             color2={type === 'plan' ? '#ffd700' : '#999999'}
                             color1={type === 'plan' ? 'gray' : '#dddddd'}
+                            onChange={onChange}
+                            initialRate={initialRate}
                         />
                     </div>
                 </BasicCard>
