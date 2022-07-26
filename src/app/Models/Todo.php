@@ -4,13 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Todo extends Model
 {
     use HasFactory;
     public function workbook()
     {
-        return $this->hasOneThrough(Question::class, Workbook::class, User::class);
+        return $this->hasOneThrough(Workbook::class, Question::class);
     }
     public function question()
     {
@@ -21,4 +22,5 @@ class Todo extends Model
     {
         return $this->question->workbook->name;
     }
+
 }

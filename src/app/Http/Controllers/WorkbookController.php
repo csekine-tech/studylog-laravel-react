@@ -21,13 +21,7 @@ class WorkbookController extends Controller
 
     public function getWorkbookList()
     {
-        // $workbookList = Question::with('todos')
-        //     ->whereHas('todos', function ($query) {
-        //         $query->whereExists(function ($query) {
-        //             return $query;
-        //         });
-        //     })->get();
-        $workbookList = Workbook::all();
+        $workbookList = Workbook::where('user_id', Auth::user()->id)->get();
 
         return response()->json([
             'status' => 200,
@@ -37,7 +31,7 @@ class WorkbookController extends Controller
 
     public function getWorkbookSubjectRelations()
     {
-        $relations = Workbook::all()->groupBy('subject_name');
+        $relations = Workbook::where('user_id', Auth::user()->id)->get()->groupBy('subject_name');
 
         return response()->json([
             'status' => 200,
@@ -56,7 +50,7 @@ class WorkbookController extends Controller
         $workbook = new Workbook;
         $workbook->name = $request->input('name');
         $workbook->subject_id = Subject::where('name', '=', $request->input('subject_name'))->first()->id;
-        $workbook->user_id = Auth::id();
+        $workbook->user_id = Auth::user()->id;
         $workbook->count = $request->input('count');
         $workbook->save();
         //questionも自動生成する
@@ -98,11 +92,11 @@ class WorkbookController extends Controller
      */
     public function destroy($id)
     {
-        Workbook::find($id)->delete();
+        Workbook::where('user_id', Auth::user()->id)->find($id)->delete();
         //questionも自動削除する
         return response()->json([
             'status' => 200,
-            'id'=>$id,
+            'id' => $id,
             'message' => 'workbook removed successfully!'
         ]);
     }

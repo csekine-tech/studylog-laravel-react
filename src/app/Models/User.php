@@ -44,15 +44,11 @@ class User extends Authenticatable
 
     public function questions()
     {
-        return $this->hasManyThrough(Workbook::class, Question::class);
+        return $this->hasManyThrough(Question::class, Workbook::class);
     }
     public function workbooks()
     {
         return $this->hasMany(Workbook::class);
-    }
-    public function todos()
-    {
-        return $this->hasManyThrough(Workbook::class, Question::class, Todo::class);
     }
     public function timetodoagains()
     {

@@ -10,6 +10,7 @@ use App\Models\Workbook;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use stdClass;
+use Illuminate\Support\Facades\Auth;
 
 class TodoController extends Controller
 {
@@ -55,9 +56,9 @@ class TodoController extends Controller
     public function update(Request $request, $id)
     {
         $isFirstRated = false;
-        $todo = Todo::find($id);
+        $todo = Todo::where('user_id', Auth::user()->id)->find($id);
         $todo->planned_at = $request->input('planned_at');
-        if (($todo->rate === null || $todo->rate === 0 )&& ($request->input('rate') !== null && $request->input('rate') !== 0)) {
+        if (($todo->rate === null || $todo->rate === 0) && ($request->input('rate') !== null && $request->input('rate') !== 0)) {
             $isFirstRated = true;
         }
         if ($request->input('rate') || $request->input('rate') !== 0) {
@@ -75,6 +76,7 @@ class TodoController extends Controller
                 $addedDay = TimeToDoAgain::find($request->input('rate'))->days;
                 $newTodo->planned_at = Carbon::parse($request->input('done_at'))->addDay($addedDay);
                 $newTodo->question_id = $todo->question->id;
+                $newTodo->user_id = Auth::user()->id;
                 $newTodo->save();
             }
         }
@@ -97,7 +99,7 @@ class TodoController extends Controller
     }
     public function getFilteredQuestion()
     {
-        $todoList = Question::with(['todos' => function ($query) {
+        $todoList = Question::where('user_id', Auth::user()->id)->with(['todos' => function ($query) {
             $query->orderBy('id', 'desc');
         }])
             ->whereHas('todos', function ($query) {
@@ -113,7 +115,7 @@ class TodoController extends Controller
     }
     public function getFilteredWorkbook()
     {
-        $todoListFilteredWorkbook = Workbook::with(['questions' => function ($query) {
+        $todoListFilteredWorkbook = Workbook::where('user_id', Auth::user()->id)->with(['questions' => function ($query) {
             $query->with(['todos' => function ($query) {
                 $query->orderBy('id', 'desc');
             }]);
@@ -125,7 +127,7 @@ class TodoController extends Controller
     }
     public function getTodoDateRelations()
     {
-        $relations = Todo::whereDate('planned_at', '<=', Carbon::now()->addDay(7))
+        $relations = Todo::where('user_id', Auth::user()->id)->whereDate('planned_at', '<=', Carbon::now()->addDay(7))
             ->orderBy('planned_at', 'asc')
             ->get()
             ->groupBy(['planned_at']);

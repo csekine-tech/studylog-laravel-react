@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Workbook extends Model
 {
@@ -15,13 +16,14 @@ class Workbook extends Model
     }
     public function todos()
     {
-        return $this->hasManyThrough(Question::class, Todo::class);
+        return $this->hasManyThrough(Todo::class, Question::class);
     }
     public function subject()
     {
         return $this->belongsTo(Subject::class);
     }
-    public function user(){
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
     protected $appends = ['subject_name'];
@@ -40,12 +42,13 @@ class Workbook extends Model
                 $question = new Question;
                 $question->workbook_id = $workbook->id;
                 $question->number = $i;
+                $question->user_id = Auth::user()->id;
                 $question->save();
             }
         });
 
         static::deleting(function ($workbook) {
-            $workbook->questions->each(function($question){
+            $workbook->questions->each(function ($question) {
                 $question->delete();
             });
         });

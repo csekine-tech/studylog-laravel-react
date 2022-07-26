@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('todos', function (Blueprint $table) {
             $table->id();
             $table->integer('question_id');
+            $table->integer('user_id');
             $table->date('planned_at')->nullable();
             $table->date('done_at')->nullable();
             $table->integer('rate')->nullable();
